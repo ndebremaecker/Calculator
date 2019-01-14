@@ -83,6 +83,7 @@
   <ItemGroup>
     <Content Include="ClientList.ascx" />
     <Content Include="EditClient.ascx" />
+    <Content Include="Images\blankuser.png" />
     <Content Include="Module.build" />
     <Content Include="module.css" />
   </ItemGroup>
@@ -92,6 +93,7 @@
       <Name>Calculator.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
