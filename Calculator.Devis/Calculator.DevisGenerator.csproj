@@ -1,0 +1,570 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <!--<Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />-->
+  <!--<Import Project="packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />-->
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{708D9D96-F434-413B-9ED8-6C414AE3F6DC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Calculator.DevisGenerator</RootNamespace>
+    <AssemblyName>Calculator.DevisGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetNuke">
+      <HintPath>D:\Documents\Websites\DNN\DNN_CT\bin\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DevisList.ascx" />
+    <Content Include="EditDevis.ascx" />
+    <Content Include="Images\logo_CT.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\logo_ProximusICTE.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="jsPDF\html2canvas.js" />
+    <Content Include="jsPDF\jsPDF\build.js" />
+    <Content Include="jsPDF\jsPDF\deletedocs.js" />
+    <Content Include="jsPDF\jsPDF\deprecated\addhtml.js" />
+    <Content Include="jsPDF\jsPDF\deprecated\from_html.js" />
+    <Content Include="jsPDF\jsPDF\deprecated\html2pdf.js" />
+    <Content Include="jsPDF\jsPDF\dist\jspdf.debug.js" />
+    <Content Include="jsPDF\jsPDF\dist\jspdf.min.js" />
+    <Content Include="jsPDF\jsPDF\docs\index.html" />
+    <Content Include="jsPDF\jsPDF\docs\jsPDF.html" />
+    <Content Include="jsPDF\jsPDF\docs\jspdf.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormButton.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormCheckBox.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormChoiceField.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormComboBox.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormEditBox.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormField.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormListBox.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormPasswordField.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormPushButton.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm-AcroFormTextField.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-AcroForm.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-addImage.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-annotations.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-arabic.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-autoprint.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-bmp_support.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-canvas.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-cell.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-context2d.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-gif_support.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-html.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-javascript.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-outline.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-png_support.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-setLanguage.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-split_text_to_size.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-standard_fonts_metrics.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-svg.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-total_pages.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-ttfsupport.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-utf8.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-vFS.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-viewerpreferences.html" />
+    <Content Include="jsPDF\jsPDF\docs\module-xmp_metadata.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_acroform.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_addimage.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_annotations.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_arabic.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_autoprint.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_bmp_support.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_canvas.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_cell.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_context2d.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_gif_support.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_html.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_javascript.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_outline.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_png_support.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_setlanguage.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_split_text_to_size.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_standard_fonts_metrics.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_svg.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_total_pages.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_ttfsupport.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_utf8.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_vfs.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_viewerpreferences.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\plugins_xmp_metadata.js.html" />
+    <Content Include="jsPDF\jsPDF\docs\scripts\collapse.js" />
+    <Content Include="jsPDF\jsPDF\docs\scripts\jquery-3.1.1.min.js" />
+    <Content Include="jsPDF\jsPDF\docs\scripts\linenumber.js" />
+    <Content Include="jsPDF\jsPDF\docs\scripts\prettify\Apache-License-2.0.txt" />
+    <Content Include="jsPDF\jsPDF\docs\scripts\prettify\lang-css.js" />
+    <Content Include="jsPDF\jsPDF\docs\scripts\prettify\prettify.js" />
+    <Content Include="jsPDF\jsPDF\docs\scripts\search.js" />
+    <Content Include="jsPDF\jsPDF\docs\styles\jsdoc.css" />
+    <Content Include="jsPDF\jsPDF\docs\styles\prettify.css" />
+    <Content Include="jsPDF\jsPDF\examples\annotation\test_annotation.html" />
+    <Content Include="jsPDF\jsPDF\examples\annotation\test_annotation_2.html" />
+    <Content Include="jsPDF\jsPDF\examples\basic.html" />
+    <Content Include="jsPDF\jsPDF\examples\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="jsPDF\jsPDF\examples\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="jsPDF\jsPDF\examples\bootstrap\css\bootstrap.css" />
+    <Content Include="jsPDF\jsPDF\examples\bootstrap\css\bootstrap.min.css" />
+    <Content Include="jsPDF\jsPDF\examples\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="jsPDF\jsPDF\examples\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="jsPDF\jsPDF\examples\bootstrap\js\bootstrap.js" />
+    <Content Include="jsPDF\jsPDF\examples\bootstrap\js\bootstrap.min.js" />
+    <Content Include="jsPDF\jsPDF\examples\canvg_context2d\bar_graph_with_text_and_lines.html" />
+    <Content Include="jsPDF\jsPDF\examples\context2d\test_context2d.html" />
+    <Content Include="jsPDF\jsPDF\examples\context2d\test_context2d_paths.html" />
+    <Content Include="jsPDF\jsPDF\examples\css\editor.css" />
+    <Content Include="jsPDF\jsPDF\examples\css\main.css" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="jsPDF\jsPDF\examples\css\smoothness\jquery-ui-1.8.17.custom.css" />
+    <Content Include="jsPDF\jsPDF\examples\downloadify.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\acid.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\acid2.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\auto_break.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\examples.css" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\images\favicon.png" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\lists.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\page_break.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\pdf2.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\showcase.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\showcase_supported_html.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\tables.html" />
+    <Content Include="jsPDF\jsPDF\examples\html2pdf\total_mess.html" />
+    <Content Include="jsPDF\jsPDF\examples\images.html" />
+    <Content Include="jsPDF\jsPDF\examples\images\24_bit.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\32_bit.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\grayscale_16bpc.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\grayscale_8bpc.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\grayscale_alpha_16_bpc.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\grayscale_alpha_8bpc.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\grid.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\jpg.jpg" />
+    <Content Include="jsPDF\jsPDF\examples\images\png8_flat.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\png8_trans.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\RGBA_16bpc.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\RGB_16bpc.png" />
+    <Content Include="jsPDF\jsPDF\examples\images\tiny_png_indexed.png" />
+    <Content Include="jsPDF\jsPDF\examples\jaxer.html" />
+    <Content Include="jsPDF\jsPDF\examples\jspdf.PLUGINTEMPLATE.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\acroforms.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\autoprint.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\basic.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\circles.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\editor.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\font-faces.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\font-size.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\from-html.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\html2canvas.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\images.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\images_png.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\jquery\jquery-1.7.1.min.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\jquery\jquery-ui-1.8.17.custom.min.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\kitchen-sink.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\landscape.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\lines.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\pdfobject.min.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\rectangles.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\string-splitting.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\test_harness.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\text-colors.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\theme-ambiance.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\triangles.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\two-page.js" />
+    <Content Include="jsPDF\jsPDF\examples\js\user-input.js" />
+    <Content Include="jsPDF\jsPDF\examples\null-logo-trans.png" />
+    <Content Include="jsPDF\jsPDF\examples\octocat.jpg" />
+    <Content Include="jsPDF\jsPDF\examples\octocat.png" />
+    <Content Include="jsPDF\jsPDF\examples\outline\test_outline.html" />
+    <Content Include="jsPDF\jsPDF\examples\runner.html" />
+    <Content Include="jsPDF\jsPDF\examples\test_from_html_css_page_breaks.html" />
+    <Content Include="jsPDF\jsPDF\examples\test_insert_page.html" />
+    <Content Include="jsPDF\jsPDF\examples\thinking-monkey.jpg" />
+    <Content Include="jsPDF\jsPDF\fontconverter\filereader.js" />
+    <Content Include="jsPDF\jsPDF\fontconverter\FileSaver.js" />
+    <Content Include="jsPDF\jsPDF\fontconverter\fontconverter.html" />
+    <Content Include="jsPDF\jsPDF\fontconverter\pure-min.css" />
+    <Content Include="jsPDF\jsPDF\index.html" />
+    <Content Include="jsPDF\jsPDF\jspdf.js" />
+    <Content Include="jsPDF\jsPDF\karma.conf.js" />
+    <Content Include="jsPDF\jsPDF\libs\adler32cs.js" />
+    <Content Include="jsPDF\jsPDF\libs\BMPDecoder.js" />
+    <Content Include="jsPDF\jsPDF\libs\Deflater.js" />
+    <Content Include="jsPDF\jsPDF\libs\JPEGEncoder.js" />
+    <Content Include="jsPDF\jsPDF\libs\png.js" />
+    <Content Include="jsPDF\jsPDF\libs\polyfill.js" />
+    <Content Include="jsPDF\jsPDF\libs\rgbcolor.js" />
+    <Content Include="jsPDF\jsPDF\libs\ttffont.js" />
+    <Content Include="jsPDF\jsPDF\libs\zlib.js" />
+    <Content Include="jsPDF\jsPDF\main.js" />
+    <Content Include="jsPDF\jsPDF\main_libs.js" />
+    <Content Include="jsPDF\jsPDF\main_node.js" />
+    <Content Include="jsPDF\jsPDF\main_node_deps.js" />
+    <Content Include="jsPDF\jsPDF\main_plugins.js" />
+    <Content Include="jsPDF\jsPDF\main_polyfill.js" />
+    <Content Include="jsPDF\jsPDF\MIT-LICENSE.txt" />
+    <Content Include="jsPDF\jsPDF\plugins\acroform.js" />
+    <Content Include="jsPDF\jsPDF\plugins\addimage.js" />
+    <Content Include="jsPDF\jsPDF\plugins\annotations.js" />
+    <Content Include="jsPDF\jsPDF\plugins\arabic.js" />
+    <Content Include="jsPDF\jsPDF\plugins\autoprint.js" />
+    <Content Include="jsPDF\jsPDF\plugins\bmp_support.js" />
+    <Content Include="jsPDF\jsPDF\plugins\canvas.js" />
+    <Content Include="jsPDF\jsPDF\plugins\cell.js" />
+    <Content Include="jsPDF\jsPDF\plugins\context2d.js" />
+    <Content Include="jsPDF\jsPDF\plugins\filters.js" />
+    <Content Include="jsPDF\jsPDF\plugins\gif_support.js" />
+    <Content Include="jsPDF\jsPDF\plugins\html.js" />
+    <Content Include="jsPDF\jsPDF\plugins\javascript.js" />
+    <Content Include="jsPDF\jsPDF\plugins\outline.js" />
+    <Content Include="jsPDF\jsPDF\plugins\png_support.js" />
+    <Content Include="jsPDF\jsPDF\plugins\setlanguage.js" />
+    <Content Include="jsPDF\jsPDF\plugins\split_text_to_size.js" />
+    <Content Include="jsPDF\jsPDF\plugins\standard_fonts_metrics.js" />
+    <Content Include="jsPDF\jsPDF\plugins\svg.js" />
+    <Content Include="jsPDF\jsPDF\plugins\total_pages.js" />
+    <Content Include="jsPDF\jsPDF\plugins\ttfsupport.js" />
+    <Content Include="jsPDF\jsPDF\plugins\utf8.js" />
+    <Content Include="jsPDF\jsPDF\plugins\vfs.js" />
+    <Content Include="jsPDF\jsPDF\plugins\viewerpreferences.js" />
+    <Content Include="jsPDF\jsPDF\plugins\xmp_metadata.js" />
+    <Content Include="jsPDF\jsPDF\rollup.config.js" />
+    <Content Include="jsPDF\jsPDF\saucelabs.karma.conf.js" />
+    <Content Include="jsPDF\jsPDF\tests\acroform\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\base64.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\bmp.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\filetypeRecognition.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\getImageProperties.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\gif.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\jpeg.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\png.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\Uint8Array.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\annotations\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\arabic\processArabic.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\autoprint\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\cell\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\complex.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\bar_graph_with_text_and_lines.svg" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\w3school.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\init\filters.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\init\jspdf.unit.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\init\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\outline\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\pages\display-mode.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\pages\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\putTotalPages\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\setlanguage\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\shapes\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\split_text_to_size\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\text\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\unicode\arabic.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\unicode\japanese.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\unicode\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\utils\compare.js" />
+    <Content Include="jsPDF\jsPDF\tests\utils\reference-server.js" />
+    <Content Include="jsPDF\jsPDF\tests\vFS\standard.spec.js" />
+    <Content Include="jsPDF\jsPDF\tests\viewerpreferences\standard.spec.js" />
+    <Content Include="Module.build" />
+    <Content Include="module.css" />
+    <Content Include="ViewDevis.ascx" />
+    <Content Include="jsPDF\jsPDF\.babelrc" />
+    <Content Include="jsPDF\jsPDF\.codeclimate.yml" />
+    <Content Include="jsPDF\jsPDF\.csslintrc" />
+    <Content Include="jsPDF\jsPDF\.eslintignore" />
+    <Content Include="jsPDF\jsPDF\.eslintrc" />
+    <Content Include="jsPDF\jsPDF\.gitignore" />
+    <Content Include="jsPDF\jsPDF\.sauce.yml" />
+    <Content Include="jsPDF\jsPDF\.travis.yml" />
+    <Content Include="jsPDF\jsPDF\bower.json" />
+    <Content Include="jsPDF\jsPDF\CNAME" />
+    <Content Include="jsPDF\jsPDF\CODE_OF_CONDUCT.md" />
+    <Content Include="jsPDF\jsPDF\examples\annotation\test_annotation-magFactor.pdf" />
+    <Content Include="jsPDF\jsPDF\examples\annotation\test_annotation.pdf" />
+    <Content Include="jsPDF\jsPDF\examples\outline\test_outline.pdf" />
+    <Content Include="jsPDF\jsPDF\HOTFIX_README.md" />
+    <Content Include="jsPDF\jsPDF\ISSUE_TEMPLATE.md" />
+    <Content Include="jsPDF\jsPDF\jsdoc.json" />
+    <Content Include="jsPDF\jsPDF\package.json" />
+    <Content Include="jsPDF\jsPDF\README.md" />
+    <Content Include="jsPDF\jsPDF\RELEASE.md" />
+    <Content Include="jsPDF\jsPDF\tests\acroform\reference\checkbox.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\acroform\reference\combobox.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\acroform\reference\listbox.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\acroform\reference\password.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\acroform\reference\pushbutton.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\acroform\reference\radiogroup.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\acroform\reference\textfield.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\blackpixel.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\bmp1p.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\bmp24p.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\bmp32p.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\bmp4p.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\bmp8p.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_1_grayscale_8_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_2_rgb_16_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_2_rgb_8_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_3_indexed_multi_colour_alpha_8_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_3_indexed_single_colour_alpha_4_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_3_indexed_single_colour_alpha_8_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_4_grayscale_alpha_16_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_4_grayscale_alpha_8_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_6_rgba_16_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\colortype_6_rgba_8_bit_png.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\gif.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\jpg.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\rotation-45.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\addimage\reference\rotation-90.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\annotations\reference\closed.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\annotations\reference\freetext.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\annotations\reference\open.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\autoprint\reference\autoprint-js.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\autoprint\reference\autoprint-nc.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\arc.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\bar_graph_with_text_and_lines.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\csscolornames.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\curves.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\drawImage.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\fillRect_strokeRect.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\fillStyle_strokeStyle.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\fonts.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\lineCap.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\lineJoin.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\moveTo_lineTo_stroke_fill.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\paths.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\sierpinski.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\smiley.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\stars.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\textBaseline.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_arc.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_bezierCurveTo.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_clip.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_closePath_v1.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_closePath_v2.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_fillStyle.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_fillText.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_font.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_lineCap_butt.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_lineCap_round.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_lineCap_square.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_lineJoin_bevel.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_lineJoin_miter.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_lineJoin_round.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_lineTo.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_quadraticCurveTo.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_rotate.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_scale.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_setTransform.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_strokeStyle.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_strokeText.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_textAlign.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_textBaseline.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_transform.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\w3s_translate.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\context2d\reference\warnsign.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\cm.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\compress.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\em.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\ex.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\in.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\landscape.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\mm.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\pc.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\properties.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\pt.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\init\reference\px.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\outline\reference\bookmark-in.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\outline\reference\bookmark-mm.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\outline\reference\bookmark-pt.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\2pages.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\3pages.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\continuous.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\fullscreen.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\outlines.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\single.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\thumbs.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\twoleft.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\tworight.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\zoom-2x.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\zoom-3x.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\zoom-full-height.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\zoom-full-page.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\zoom-full-width.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\pages\reference\zoom-original.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\putTotalPages\reference\customfont.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\putTotalPages\reference\standardfont.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\README.md" />
+    <Content Include="jsPDF\jsPDF\tests\setlanguage\reference\enUS.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\shapes\reference\circles.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\shapes\reference\fill-color.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\shapes\reference\line.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\shapes\reference\lines.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\shapes\reference\rectangles.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\alignment.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\alternating-text-styling.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\angle.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\blank.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\color.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\different-sizes.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\font-faces.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\letter-spacing.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\line-break.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\red-black.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\standard.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\stroke.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\text\reference\two-page.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\unicode\reference\arabic-3lines-right.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\unicode\reference\arabic.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\unicode\reference\japanese-kana-nani.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\unicode\reference\russian-1line.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\unicode\reference\russian-2line.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\viewerpreferences\reference\FitWindow.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\viewerpreferences\reference\HideMenubar.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\viewerpreferences\reference\HideToolbar.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\viewerpreferences\reference\HideWindowUI.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\viewerpreferences\reference\PrintPageRange.pdf" />
+    <Content Include="jsPDF\jsPDF\tests\viewerpreferences\reference\ViewAreaMediaBox.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\DevisController.cs" />
+    <Compile Include="DevisList.ascx.cs">
+      <DependentUpon>DevisList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevisList.ascx.designer.cs">
+      <DependentUpon>DevisList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditDevis.ascx.cs">
+      <DependentUpon>EditDevis.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditDevis.ascx.designer.cs">
+      <DependentUpon>EditDevis.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewDevis.ascx.cs">
+      <DependentUpon>ViewDevis.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewDevis.ascx.designer.cs">
+      <DependentUpon>ViewDevis.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\Calculator.Model.csproj">
+      <Project>{52bdd9d6-85f1-4f66-9117-3ae1e7d8ed30}</Project>
+      <Name>Calculator.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54932</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54932/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <!-- comment 
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'JPP'))" />
+    -->
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <Import Project="Module.build" />
+</Project>

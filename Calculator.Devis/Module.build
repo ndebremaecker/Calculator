@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<Target Name="AfterBuild" DependsOnTargets="CopyBin;CopyFiles;"/>
+
+	<PropertyGroup>
+		<WebsitePath>D:\Documents\Websites\DNN\DNN_CT_2</WebsitePath>
+		<WebsiteBinPath>$(WebsitePath)\bin</WebsiteBinPath>
+		<ModuleFolderName>$(WebsitePath)\DesktopModules\Calculator\Devis</ModuleFolderName>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Views Include="*.ascx;" />
+		<Styles Include="*.css;" />
+		<Images Include="Images\*.jpg" />
+	</ItemGroup>
+
+
+
+	<Target Name="CopyBin">
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).dll" DestinationFolder="$(WebsiteBinPath)" />
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).pdb" DestinationFolder="$(WebsiteBinPath)" />
+	</Target>
+  
+	
+
+
+	<Target Name="CopyFiles">
+	    <Copy SourceFiles="@(Views)" DestinationFolder="$(ModuleFolderName)" />
+	    <Copy SourceFiles="@(Styles)" DestinationFolder="$(ModuleFolderName)" />
+	    <Copy SourceFiles="@(Images)" DestinationFolder="$(ModuleFolderName)\Images" />
+	</Target>
+
+
+</Project>
