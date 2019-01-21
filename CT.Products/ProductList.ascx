@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProductList.ascx.cs" Inherits="Calculator.Products.ProductList" %>
 
-<asp:DataGrid ID="products" runat="server"
+<%--<asp:DataGrid ID="products" runat="server"
     AutoGenerateColumns="false"
     GridLines="None"
     OnItemCommand="DeleteProduct">
@@ -51,7 +51,7 @@
             </ItemTemplate>
         </asp:TemplateColumn>
     </Columns>
-</asp:DataGrid>
+</asp:DataGrid>--%>
 
 
 
@@ -65,3 +65,41 @@
     </li>
 </ul>
 <%-- ReSharper restore UnknownCssClass --%>
+
+<div class="row">
+    <asp:Repeater ID="products" runat="server"
+        OnItemCommand="DeleteProduct">
+        <ItemTemplate>
+            <div class="col-sm-12">
+                <div class="card" style="padding: 15px 0 15px 10px; border-bottom: 1px solid lightgrey;">
+                    <div class="card-body">
+                        <asp:Image runat="server" ImageUrl="~/desktopmodules/Calculator/Products/Images/empty-photo.jpg"
+                            Style="float: left; padding: 5px; margin: 5px; margin-right: 15px; border: 1px solid lightgrey; border-radius: 5px; width: 80px; height: 80px;" />
+                        <h5 class="card-title">
+                            <asp:HyperLink ID="Hyperlink1" runat="server"
+                                NavigateUrl='<%# ModuleContext.EditUrl("id", Eval("id").ToString(), "Edit") %>'
+                                ForeColor="Blue">
+                                <asp:Label ID="First_Name" Text='<%# Eval("Product_Name") %>' runat="server" />
+                            </asp:HyperLink>
+                        </h5>
+                        <p class="card-text">
+                            <%# Eval("Unit_Price") %>
+                            <br />
+                            En stock /  <%# Eval("Qty_in_Stock")  %>
+                            <span style="float: right; margin-top: -30px; font-style: italic; color: lightgray"><%# Eval("Created_Time") %></span>
+                        </p>
+                    </div>
+                    <div class="card-footer" style="float: right; margin-top: -25px">
+                        
+                        
+                        <asp:LinkButton ID="LinkButton1" CssClass="btn btn-primary" runat="server"
+                            CommandArgument='<%# Eval("id") %>'
+                            CommandName="Delete"
+                            Text="Delete">
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+        </ItemTemplate>
+    </asp:Repeater>
+</div>

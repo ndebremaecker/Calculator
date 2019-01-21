@@ -25,7 +25,8 @@ namespace Calculator.Products
 
             addButton.NavigateUrl = ModuleContext.EditUrl("Edit");
         }
-        protected void DeleteProduct(object source, DataGridCommandEventArgs e)
+
+        protected void DeleteProduct(object source, RepeaterCommandEventArgs e)
         {
             var id = Convert.ToInt64(e.CommandArgument);
             var product = controller.GetProduct(id);

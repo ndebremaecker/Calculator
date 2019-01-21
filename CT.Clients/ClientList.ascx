@@ -66,10 +66,13 @@
                 <div class="card" style="padding: 15px 0 15px 10px; border-bottom: 1px solid lightgrey;">
                     <div class="card-body">
                         <asp:Image runat="server" ImageUrl="~/desktopmodules/Calculator/Clients/Images/blankuser.png" 
-                            Style="float: left; padding: 5px; margin: 5px; margin-right: 15px; border: 1px solid lightgrey; border-radius: 5px" />
+                            Style="float: left; padding: 5px; margin: 5px; margin-right: 15px; border: 1px solid lightgrey; border-radius: 5px; width: 80px; height:80px;" />
                         <h5 class="card-title">
-                            <asp:Label ID="First_Name" Text='<%# Eval("First_Name") %>' runat="server" />
-                            <asp:Label ID="Last_Name" Text='<%# Eval("Last_Name") %>' runat="server" /> / 
+                            <asp:HyperLink ID="Hyperlink1" runat="server"
+                                NavigateUrl='<%# ModuleContext.EditUrl("id", Eval("id").ToString(), "Edit") %>' >
+                                <asp:Label ID="First_Name" Text='<%# Eval("First_Name") %>' runat="server" />
+                                <asp:Label ID="Last_Name" Text='<%# Eval("Last_Name") %>' runat="server" />
+                            </asp:HyperLink> / 
                             <asp:Label ID="lblAccount_Name" Text='<%# Eval("_Account_Name.name") %>' runat="server" Style="color: chocolate; font-size: 70%; font-style: italic;" CssClass="Account_Name" />
                         </h5>
                         <p class="card-text"><%# Eval("Email") %> / <%# Eval("Phone")%> / <%# Eval("Mobile") %> <br />
@@ -78,10 +81,6 @@
                         </p>
                     </div>
                     <div class="card-footer" style="float:right; margin-top:-25px">
-                        <asp:HyperLink CssClass="btn btn-primary" ID="Hyperlink1" runat="server"
-                            NavigateUrl='<%# ModuleContext.EditUrl("id", Eval("id").ToString(), "Edit") %>'
-                            Text="Edit" ForeColor="White">
-                        </asp:HyperLink>
                         <asp:LinkButton ID="LinkButton1" CssClass="btn btn-primary" runat="server"
                             CommandArgument='<%# Eval("id") %>'
                             CommandName="Delete"
