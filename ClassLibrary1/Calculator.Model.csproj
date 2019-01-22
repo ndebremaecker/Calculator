@@ -42,12 +42,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accessoire.cs" />
+    <Compile Include="Antenne.cs" />
     <Compile Include="Approval.cs" />
+    <Compile Include="Audit.cs" />
+    <Compile Include="CablageEtGestion.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Devis.cs" />
+    <Compile Include="DevisAccessoire.cs" />
+    <Compile Include="DevisAntenne.cs" />
+    <Compile Include="DevisAudit.cs" />
+    <Compile Include="DevisCablageEtGestion.cs" />
+    <Compile Include="DevisDivers.cs" />
+    <Compile Include="DevisFanBox.cs" />
+    <Compile Include="DevisPrestationDeServiceIT.cs" />
+    <Compile Include="DevisSwitch.cs" />
+    <Compile Include="Divers.cs" />
+    <Compile Include="FanBox.cs" />
     <Compile Include="Lambda.cs" />
+    <Compile Include="PrestationDeServiceIT.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Switch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Module.build" />

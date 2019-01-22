@@ -25,7 +25,7 @@
                     HeaderStyle-Width="150px"
                     HeaderText="Email"></asp:BoundColumn>                
                 <asp:BoundColumn
-                    DataField="TotalHTVA"
+                    DataField="TotalHTVACombined"
                     HeaderStyle-Width="100px"
                     HeaderText="Total HTVA"></asp:BoundColumn>
                 <asp:BoundColumn
@@ -74,7 +74,7 @@
 </div>
 
 <%-- ReSharper disable UnknownCssClass --%>
-<ul class="dnnActions dnnClear">
+<ul class="dnnActions dnnClear" style="padding-left: 10px;">
     <li>
         <asp:HyperLink ID="addButton" runat="server" CssClass="dnnPrimaryAction" Text="Nouveau Devis">
         </asp:HyperLink>

@@ -19,7 +19,8 @@ namespace Calculator.Model
         public string PrenomIT { get; set; }
         public string TelIT { get; set; }
         public string EmailIT { get; set; }
-        public decimal TotalHTVA { get; set; }
+        public decimal TotalProduitsHTVA { get; set; }
+        public decimal TotalMaintenanceHTVA { get; set; }
         public DateTime DateSignature { get; set; }
         public bool Autoliquidation { get; set; }
         public bool DevisSigne { get; set; }
@@ -27,11 +28,14 @@ namespace Calculator.Model
         public DateTime DateCreation { get; set; }
         public string PathPDF { get; set; }
         public DateTime DateUploadPDF { get; set; }
+        public int PeriodiciteMaintenance { get; set; }
+        public int PeriodiciteFacturationMaintenance { get; set; }
 
         public string NomClientComplet { get; set; }
         public string DateSignatureAsString { get; set; }
         public string DevisSigneAsString { get; set; }
         public string DateCreationAsString { get; set; }
         public string DateUploadPDFAsString { get; set; }
+        public decimal TotalHTVACombined { get; set; }
     }
 }

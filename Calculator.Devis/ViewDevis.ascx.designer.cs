@@ -157,13 +157,121 @@ namespace Calculator.DevisGenerator {
         protected global::System.Web.UI.WebControls.Label emailITLabel;
         
         /// <summary>
-        /// Contrôle totalHTVALabel.
+        /// Contrôle panelAudit.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label totalHTVALabel;
+        protected global::System.Web.UI.WebControls.Panel panelAudit;
+        
+        /// <summary>
+        /// Contrôle panelAntennes.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelAntennes;
+        
+        /// <summary>
+        /// Contrôle panelFanBox.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelFanBox;
+        
+        /// <summary>
+        /// Contrôle panelSwitch.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSwitch;
+        
+        /// <summary>
+        /// Contrôle panelPrestationDeServiceIT.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelPrestationDeServiceIT;
+        
+        /// <summary>
+        /// Contrôle panelCablageEtGestion.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelCablageEtGestion;
+        
+        /// <summary>
+        /// Contrôle panelAccessoires.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelAccessoires;
+        
+        /// <summary>
+        /// Contrôle panelDivers.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelDivers;
+        
+        /// <summary>
+        /// Contrôle totalProduitsHTVALabel.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label totalProduitsHTVALabel;
+        
+        /// <summary>
+        /// Contrôle totalMaintenanceHTVALabel.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label totalMaintenanceHTVALabel;
+        
+        /// <summary>
+        /// Contrôle maintenanceExplanationDiv.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl maintenanceExplanationDiv;
+        
+        /// <summary>
+        /// Contrôle maintenanceExplanationLabel.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label maintenanceExplanationLabel;
+        
+        /// <summary>
+        /// Contrôle totalMaintenanceTrancheLabel.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label totalMaintenanceTrancheLabel;
         
         /// <summary>
         /// Contrôle remarquesLabel.

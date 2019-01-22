@@ -95,11 +95,30 @@
             </td>
         </tr>
     </table>
-    
+
+    <asp:Panel runat="server" ID="panelAudit"></asp:Panel>
+    <asp:Panel runat="server" ID="panelAntennes"></asp:Panel>
+    <asp:Panel runat="server" ID="panelFanBox"></asp:Panel>
+    <asp:Panel runat="server" ID="panelSwitch"></asp:Panel>
+    <asp:Panel runat="server" ID="panelPrestationDeServiceIT"></asp:Panel>
+    <asp:Panel runat="server" ID="panelCablageEtGestion"></asp:Panel>
+    <asp:Panel runat="server" ID="panelAccessoires"></asp:Panel>
+    <asp:Panel runat="server" ID="panelDivers"></asp:Panel>
+
+
     <div class="devisPriceBox">
-        <span>Total HTVA</span>
-        <span style="padding-left: 80px; font-style: normal;">€&nbsp;</span>
-        <asp:Label ID="totalHTVALabel" runat="server" Style="font-style: normal;"></asp:Label>
+        <div>
+            <span>Total HTVA</span>
+            <span style="padding-left: 30px; font-style: normal;">€&nbsp;</span>
+            <asp:Label ID="totalProduitsHTVALabel" runat="server" Style="font-style: normal;"></asp:Label>
+            <span style="padding-left: 50px; font-style: normal;">€&nbsp;</span>
+            <asp:Label ID="totalMaintenanceHTVALabel" runat="server" Style="font-style: normal;"></asp:Label>
+        </div>
+        <div id="maintenanceExplanationDiv" runat="server" visible="false">
+            <asp:Label ID="maintenanceExplanationLabel" runat="server"></asp:Label>
+            <span style="padding-left: 138px; font-style: normal;">€&nbsp;</span>
+            <asp:Label ID="totalMaintenanceTrancheLabel" runat="server" Style="font-style: normal;"></asp:Label>
+        </div>
     </div>
 
     <table class="devisTable">
