@@ -44,6 +44,7 @@ namespace Calculator.DevisGenerator.Controller
         public void UpdateDevis(Devis devis)
         {
             DataProvider.Instance().ExecuteNonQuery("dnn_Calculator_UpdateDevis", devis.Id, devis.NomSociete, devis.AdresseSociete, devis.AdresseFacturation,
+                devis.AdresseInstallation, devis.TelSociete, devis.NumeroEntreprise, devis.NomClient, devis.PrenomClient, devis.TelDirect, devis.Email, devis.NomIT,
                 devis.PrenomIT, devis.TelIT, devis.EmailIT, devis.TotalProduitsHTVA, devis.TotalMaintenanceHTVA,
                 (devis.DateSignature.Year == 1753) ? SqlDateTime.Null : devis.DateSignature, devis.Autoliquidation, devis.DevisSigne, devis.Remarques,
                 devis.PeriodiciteMaintenance, devis.PeriodiciteFacturationMaintenance);

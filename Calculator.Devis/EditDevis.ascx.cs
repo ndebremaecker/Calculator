@@ -18,6 +18,9 @@ namespace Calculator.DevisGenerator
         private readonly DevisController controller = new DevisController();
         private string debugText = "";
         private IList<Accessoire> accessoireList;
+        private decimal commissionAccessoires;
+        private decimal commissionMaitenanceAccessoires;
+
         private IList<Antenne> antenneList;
         private List<DropDownList> antenneDropDownLists = new List<DropDownList>();
         private List<TextBox> antenneQtTextBoxes = new List<TextBox>();
@@ -25,7 +28,12 @@ namespace Calculator.DevisGenerator
         private List<TextBox> antennePcTextBoxes = new List<TextBox>();
         private List<Label> antennePrixLabels = new List<Label>();
         private List<Label> antenneMaintenanceLabels = new List<Label>();
+        private List<decimal> commissionAntennes = new List<decimal>();
+        private List<decimal> commissionMaintenanceAntennes = new List<decimal>();
+
         private IList<Audit> auditList;
+        private decimal commissionAudit;
+
         private IList<CablageEtGestion> cablageList;
         private List<DropDownList> cablageDropDownLists = new List<DropDownList>();
         private List<TextBox> cablageQtTextBoxes = new List<TextBox>();
@@ -34,6 +42,8 @@ namespace Calculator.DevisGenerator
         private List<Label> cablagePrixLabels = new List<Label>();
         private List<TextBox> cablagePrixForfaitTextBoxes = new List<TextBox>();
         private List<Label> cablageMaintenanceLabels = new List<Label>();
+        private List<decimal> commissionCablage = new List<decimal>();
+
         private IList<Divers> diversList;
         private List<DropDownList> diversDropDownLists = new List<DropDownList>();
         private List<TextBox> diversQtTextBoxes = new List<TextBox>();
@@ -41,9 +51,20 @@ namespace Calculator.DevisGenerator
         private List<TextBox> diversPcTextBoxes = new List<TextBox>();
         private List<Label> diversPrixLabels = new List<Label>();
         private List<Label> diversMaintenanceLabels = new List<Label>();
+        private List<decimal> commissionDivers = new List<decimal>();
+        private List<decimal> commissionMaintenanceDivers = new List<decimal>();
+
         private IList<FanBox> fanBoxList;
+        private decimal commissionFanBox;
+        private decimal commissionMaintenanceFanBox;
+
         private IList<PrestationDeServiceIT> prestationList;
+        private decimal commissionPrestation;
+
         private IList<Switch> switchList;
+        private decimal commissionSwitch;
+        private decimal commissionMaitenanceSwitch;
+
         private const decimal ratioPIEC = 0.95M;
 
         protected override void OnLoad(EventArgs e)
@@ -56,6 +77,8 @@ namespace Calculator.DevisGenerator
             Page.MaintainScrollPositionOnPostBack = true;
 
             FillListVariables();
+            InitCommissionVariables();
+
             if (!IsPostBack) FillDropDownLists();
 
             //get the devisid from the querystring
@@ -77,8 +100,6 @@ namespace Calculator.DevisGenerator
                 prenomITTextBox.Text = devis.PrenomIT;
                 telITTextBox.Text = devis.TelIT;
                 emailITTextBox.Text = devis.EmailIT;
-                totalProduitsHTVATextBox.Text = (Convert.ToDecimal(devis.TotalProduitsHTVA, CultureInfo.InvariantCulture)).ToString();
-                totalMaintenanceHTVATextBox.Text = (Convert.ToDecimal(devis.TotalMaintenanceHTVA, CultureInfo.InvariantCulture)).ToString();
                 dateSignatureTextBox.Text = (devis.DateSignature.Year == 1) ? "" : devis.DateSignature.ToString("dd/MM/yy");
                 autoliquidationCheckBox.Checked = devis.Autoliquidation;
                 devisSigneCheckBox.Checked = devis.DevisSigne;
@@ -86,6 +107,7 @@ namespace Calculator.DevisGenerator
                 maintenanceDropDownList.SelectedValue = devis.PeriodiciteMaintenance.ToString();
                 facturationMaintenanceDropDownList.SelectedValue = devis.PeriodiciteFacturationMaintenance.ToString();
                 if (devis.PeriodiciteMaintenance > 0) facturationMaintenance.Visible = true;
+                UpdateCommMaintenanceLabel();
 
                 IList<DevisAudit> savedAuditList = controller.GetDevisAudits(devisId);
                 if (savedAuditList.Count > 0)
@@ -94,7 +116,6 @@ namespace Calculator.DevisGenerator
                     auditQt.Text = savedAuditList[0].Qt.ToString();
                     auditPc.Text = savedAuditList[0].Pc.ToString();
                     auditUnit.Text = auditList.Single(u => u.Id == savedAuditList[0].Item).Unite;
-                    CalculateAudit();
                 }
 
                 IList<DevisFanBox> savedFanBoxList = controller.GetDevisFanBoxes(devisId);
@@ -104,7 +125,6 @@ namespace Calculator.DevisGenerator
                     fanBoxQt.Text = savedFanBoxList[0].Qt.ToString();
                     fanBoxPc.Text = savedFanBoxList[0].Pc.ToString();
                     fanBoxUnit.Text = fanBoxList.Single(u => u.Id == savedFanBoxList[0].Item).Unite;
-                    CalculateFanBox();
                 }
 
                 IList<DevisSwitch> savedSwitchList = controller.GetDevisSwitches(devisId);
@@ -114,7 +134,6 @@ namespace Calculator.DevisGenerator
                     switchQt.Text = savedSwitchList[0].Qt.ToString();
                     switchPc.Text = savedSwitchList[0].Pc.ToString();
                     switchUnit.Text = switchList.Single(u => u.Id == savedSwitchList[0].Item).Unite;
-                    CalculateSwitch();
                 }
 
                 IList<DevisPrestationDeServiceIT> savedPrestationList = controller.GetDevisPrestationsDeServiceIT(devisId);
@@ -124,7 +143,6 @@ namespace Calculator.DevisGenerator
                     prestationQt.Text = savedPrestationList[0].Qt.ToString();
                     prestationPc.Text = savedPrestationList[0].Pc.ToString();
                     prestationUnit.Text = prestationList.Single(u => u.Id == savedPrestationList[0].Item).Unite;
-                    CalculatePrestation();
                 }
 
                 IList<DevisAccessoire> savedAccessoireList = controller.GetDevisAccessoires(devisId);
@@ -134,7 +152,6 @@ namespace Calculator.DevisGenerator
                     accessoireQt.Text = savedAccessoireList[0].Qt.ToString();
                     accessoirePc.Text = savedAccessoireList[0].Pc.ToString();
                     accessoireUnit.Text = accessoireList.Single(u => u.Id == savedAccessoireList[0].Item).Unite;
-                    CalculateAccessoires();
                 }
 
                 IList<DevisAntenne> savedAntenneList = controller.GetDevisAntennes(devisId);
@@ -147,7 +164,6 @@ namespace Calculator.DevisGenerator
                         antennePcTextBoxes[i].Text = savedAntenneList[i].Pc.ToString();
                         antenneUnitLabels[i].Text = antenneList.Single(u => u.Id == savedAntenneList[i].Item).Unite;
                     }
-                    CalculateAntennes();
                 }
 
                 IList<DevisDivers> savedDiversList = controller.GetDevisDivers(devisId);
@@ -160,7 +176,6 @@ namespace Calculator.DevisGenerator
                         diversPcTextBoxes[i].Text = savedDiversList[i].Pc.ToString();
                         diversUnitLabels[i].Text = diversList.Single(u => u.Id == savedDiversList[i].Item).Unite;
                     }
-                    CalculateDivers();
                 }
 
                 IList<DevisCablageEtGestion> savedCablageList = controller.GetDevisCablages(devisId);
@@ -178,7 +193,6 @@ namespace Calculator.DevisGenerator
                             cablagePrixForfaitTextBoxes[i].Text = (Convert.ToDecimal(savedCablageList[i].PrixForfait, CultureInfo.InvariantCulture)).ToString();
                         }
                     }
-                    CalculateCablage();
                 }
             }
 
@@ -186,7 +200,11 @@ namespace Calculator.DevisGenerator
             {
                 totalProduitsHTVATextBox.Text = "0.00";
                 totalMaintenanceHTVATextBox.Text = "0.00";
+                commRevendeurOneShotTextBox.Text = "0.00";
+                commRevendeurMaintenanceTextBox.Text = "0.00";
             }
+
+            CalculateFullDevis();
         }
 
         protected void SaveDevis(object sender, EventArgs e)
@@ -747,6 +765,33 @@ namespace Calculator.DevisGenerator
             SetUpCablageLists();
         }
 
+        private void InitCommissionVariables()
+        {
+            commissionAccessoires = 0;
+            commissionMaitenanceAccessoires = 0;
+            commissionAudit = 0;
+            commissionFanBox = 0;
+            commissionMaintenanceFanBox = 0;
+            commissionPrestation = 0;
+            commissionSwitch = 0;
+            commissionMaitenanceSwitch = 0;
+
+            for (int i = 0; i < antenneDropDownLists.Count; i++)
+            {
+                commissionAntennes.Add(0);
+                commissionMaintenanceAntennes.Add(0);
+            }
+            for (int i = 0; i < cablageDropDownLists.Count; i++)
+            {
+                commissionCablage.Add(0);
+            }
+            for (int i = 0; i < diversDropDownLists.Count; i++)
+            {
+                commissionDivers.Add(0);
+                commissionMaintenanceDivers.Add(0);
+            }
+        }
+
         private void FillDropDownLists()
         {
             accessoireDropDownList.DataSource = accessoireList;
@@ -814,6 +859,12 @@ namespace Calculator.DevisGenerator
             return Math.Round(PVRev / ratioPIEC, 2);
         }
 
+        private decimal CommissionPrice(decimal price, int qt, int pc)
+        {
+            decimal PVFandigo = price * qt;
+            return Math.Round((PVFandigo * ((decimal)pc / 100)), 2);
+        }
+
         private decimal MaintenancePrice(decimal price, int qt, int pc)
         {
             decimal PVFandigo = ((price * qt) / 2) * Int32.Parse(maintenanceDropDownList.SelectedValue);
@@ -821,14 +872,10 @@ namespace Calculator.DevisGenerator
             return Math.Round(PVRev / ratioPIEC, 2);
         }
 
-        private void CheckPcTextBox(TextBox tBox)
+        private decimal CommissionMaintenancePrice(decimal price, int qt, int pc)
         {
-            if (!String.IsNullOrEmpty(tBox.Text))
-            {
-                int pcAsInt = Int32.Parse(tBox.Text);
-                if (pcAsInt < 3) tBox.Text = "3";
-                else if (pcAsInt > 50) tBox.Text = "50";
-            }
+            decimal PVFandigo = ((price * qt) / 2) * Int32.Parse(maintenanceDropDownList.SelectedValue);
+            return Math.Round((PVFandigo * ((decimal)pc / 100)), 2);
         }
 
         protected void MaintenanceSelected(object sender, EventArgs e)
@@ -836,137 +883,33 @@ namespace Calculator.DevisGenerator
             if (Int32.Parse(maintenanceDropDownList.SelectedValue) > 0) facturationMaintenance.Visible = true;
             else facturationMaintenance.Visible = false;
 
-            CalculateFanBox();
-            CalculateSwitch();
-            CalculateAccessoires();
-            CalculateAntennes();
-            CalculateDivers();
-
-            CalculateFullDevis();
+            UpdateCommMaintenanceLabel();
         }
 
-        protected void AuditPcChange(object sender, EventArgs e)
+        protected void FacturationMaintenanceSelected(object sender, EventArgs e)
         {
-            CheckPcTextBox(sender as TextBox);
-            CalculateAudit();
-            CalculateFullDevis();
+            UpdateCommMaintenanceLabel();
         }
 
-        protected void FanBoxPcChange(object sender, EventArgs e)
+        private void UpdateCommMaintenanceLabel()
         {
-            CheckPcTextBox(sender as TextBox);
-            CalculateFanBox();
-            CalculateFullDevis();
+            int periodiciteMaintenance = Int32.Parse(maintenanceDropDownList.SelectedValue);
+            int periodiciteFacturation = Int32.Parse(facturationMaintenanceDropDownList.SelectedValue);
+            if (periodiciteMaintenance == 0 || periodiciteFacturation == 1) commRevendeurMaintenanceLabel.Text = "Comm revendeur Maintenance:";
+            else commRevendeurMaintenanceLabel.Text = "Comm revendeur Maintenance (par an pdt " + periodiciteMaintenance.ToString() + " ans):";
+
         }
 
-        protected void SwitchPcChange(object sender, EventArgs e)
+        protected void Recalculate(object sender, EventArgs e)
         {
-            CheckPcTextBox(sender as TextBox);
-            CalculateSwitch();
-            CalculateFullDevis();
         }
 
-        protected void PrestationPcChange(object sender, EventArgs e)
-        {
-            CheckPcTextBox(sender as TextBox);
-            CalculatePrestation();
-            CalculateFullDevis();
-        }
-
-        protected void AccessoirePcChange(object sender, EventArgs e)
-        {
-            CheckPcTextBox(sender as TextBox);
-            CalculateAccessoires();
-            CalculateFullDevis();
-        }
-
-        protected void AntennePcChange(object sender, EventArgs e)
-        {
-            CheckPcTextBox(sender as TextBox);
-            CalculateAntennes();
-            CalculateFullDevis();
-        }
-
-        protected void DiversPcChange(object sender, EventArgs e)
-        {
-            CheckPcTextBox(sender as TextBox);
-            CalculateDivers();
-            CalculateFullDevis();
-        }
-
-        protected void CablagePcChange(object sender, EventArgs e)
-        {
-            CheckPcTextBox(sender as TextBox);
-            CalculateCablage();
-            CalculateFullDevis();
-        }
-
-        protected void AuditQtChange(object sender, EventArgs e)
-        {
-            CalculateAudit();
-            CalculateFullDevis();
-        }
-
-        protected void FanBoxQtChange(object sender, EventArgs e)
-        {
-            CalculateFanBox();
-            CalculateFullDevis();
-        }
-
-        protected void SwitchQtChange(object sender, EventArgs e)
-        {
-            CalculateSwitch();
-            CalculateFullDevis();
-        }
-
-        protected void PrestationQtChange(object sender, EventArgs e)
-        {
-            CalculatePrestation();
-            CalculateFullDevis();
-        }
-
-        protected void AccessoireQtChange(object sender, EventArgs e)
-        {
-            CalculateAccessoires();
-            CalculateFullDevis();
-        }
-
-        protected void AntenneQtChange(object sender, EventArgs e)
-        {
-            CalculateAntennes();
-            CalculateFullDevis();
-        }
-
-        protected void DiversQtChange(object sender, EventArgs e)
-        {
-            CalculateDivers();
-            CalculateFullDevis();
-        }
-
-        protected void CablageQtChange(object sender, EventArgs e)
-        {
-            TextBox t = sender as TextBox;
-            int index = (cablageQtTextBoxes.IndexOf(t));
-            if ((cablageList.SingleOrDefault(u => u.Id == Int32.Parse(cablageDropDownLists[index].SelectedValue))) != null &&
-                ((cablageList.Single(u => u.Id == Int32.Parse(cablageDropDownLists[index].SelectedValue)).Unite).Equals("Forf"))) t.Text = "1";
-            CalculateCablage();
-            CalculateFullDevis();
-        }
-
-        protected void CablagePrixForfaitChange(object sender, EventArgs e)
-        {
-            CalculateCablage();
-            CalculateFullDevis();
-        }
-
-        protected void AuditItemSelected(object sender, EventArgs e)
+            protected void AuditItemSelected(object sender, EventArgs e)
         {
             DropDownList d = sender as DropDownList;
             int val = Int32.Parse(d.SelectedValue);
             if (val == 0) auditUnit.Text = "";
             else auditUnit.Text = auditList.Single(u => u.Id == val).Unite;
-            CalculateAudit();
-            CalculateFullDevis();
         }
 
         protected void FanBoxItemSelected(object sender, EventArgs e)
@@ -975,8 +918,6 @@ namespace Calculator.DevisGenerator
             int val = Int32.Parse(d.SelectedValue);
             if (val == 0) fanBoxUnit.Text = "";
             else fanBoxUnit.Text = fanBoxList.Single(u => u.Id == val).Unite;
-            CalculateFanBox();
-            CalculateFullDevis();
         }
 
         protected void SwitchItemSelected(object sender, EventArgs e)
@@ -985,8 +926,6 @@ namespace Calculator.DevisGenerator
             int val = Int32.Parse(d.SelectedValue);
             if (val == 0) switchUnit.Text = "";
             else switchUnit.Text = switchList.Single(u => u.Id == val).Unite;
-            CalculateSwitch();
-            CalculateFullDevis();
         }
 
         protected void PrestationItemSelected(object sender, EventArgs e)
@@ -995,8 +934,6 @@ namespace Calculator.DevisGenerator
             int val = Int32.Parse(d.SelectedValue);
             if (val == 0) prestationUnit.Text = "";
             else prestationUnit.Text = prestationList.Single(u => u.Id == val).Unite;
-            CalculatePrestation();
-            CalculateFullDevis();
         }
 
         protected void AccessoireItemSelected(object sender, EventArgs e)
@@ -1005,8 +942,6 @@ namespace Calculator.DevisGenerator
             int val = Int32.Parse(d.SelectedValue);
             if (val == 0) accessoireUnit.Text = "";
             else accessoireUnit.Text = accessoireList.Single(u => u.Id == val).Unite;
-            CalculateAccessoires();
-            CalculateFullDevis();
         }
 
         protected void AntenneItemSelected(object sender, EventArgs e)
@@ -1017,8 +952,6 @@ namespace Calculator.DevisGenerator
                 if (val == 0) antenneUnitLabels[i].Text = "";
                 else antenneUnitLabels[i].Text = antenneList.Single(u => u.Id == val).Unite;
             }
-            CalculateAntennes();
-            CalculateFullDevis();
         }
 
         protected void DiversItemSelected(object sender, EventArgs e)
@@ -1029,8 +962,6 @@ namespace Calculator.DevisGenerator
                 if (val == 0) diversUnitLabels[i].Text = "";
                 else diversUnitLabels[i].Text = diversList.Single(u => u.Id == val).Unite;
             }
-            CalculateDivers();
-            CalculateFullDevis();
         }
 
         protected void CablageItemSelected(object sender, EventArgs e)
@@ -1045,8 +976,6 @@ namespace Calculator.DevisGenerator
                 else HideCablageForfaitTextBox(i);
             }
 
-            CalculateCablage();
-            CalculateFullDevis();
         }
 
         private void ShowCablageForfaitTextBox(int index)
@@ -1054,6 +983,7 @@ namespace Calculator.DevisGenerator
             cablageQtTextBoxes[index].Text = "1";
             cablagePrixLabels[index].Visible = false;
             cablagePrixForfaitTextBoxes[index].Visible = true;
+            if (String.IsNullOrEmpty(cablagePrixForfaitTextBoxes[index].Text)) cablagePrixForfaitTextBoxes[index].Text = "0.00";
         }
 
         private void HideCablageForfaitTextBox(int index)
@@ -1063,19 +993,31 @@ namespace Calculator.DevisGenerator
             cablagePrixForfaitTextBoxes[index].Visible = false;
         }
 
+        private int PercentageTextBoxCheck(TextBox tBox)
+        {
+            if (String.IsNullOrEmpty(tBox.Text)) return 0;
+            int pcAsInt = Int32.Parse(tBox.Text);
+            if (pcAsInt < 3) pcAsInt = 3;
+            else if (pcAsInt > 50) pcAsInt = 50;
+            tBox.Text = pcAsInt.ToString();
+            return pcAsInt;
+        }
+
         private void CalculateAudit()
         {
             int dropDownListValue = Int32.Parse(auditDropDownList.SelectedValue);
             int qtValue = (String.IsNullOrEmpty(auditQt.Text)) ? 0 : Int32.Parse(auditQt.Text);
-            int pcValue = (String.IsNullOrEmpty(auditPc.Text)) ? 0 : Int32.Parse(auditPc.Text);
+            int pcValue = PercentageTextBoxCheck(auditPc);
             if (dropDownListValue != 0 && qtValue != 0 && pcValue != 0)
             {
                 auditPrix.Text = (ActualPrice(auditList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                commissionAudit = CommissionPrice(auditList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                 auditMaintenance.Text = "0.00";
             }
             else
             {
                 auditPrix.Text = "";
+                commissionAudit = 0;
                 auditMaintenance.Text = "";
             }
         }
@@ -1084,20 +1026,28 @@ namespace Calculator.DevisGenerator
         {
             int dropDownListValue = Int32.Parse(fanBoxDropDownList.SelectedValue);
             int qtValue = (String.IsNullOrEmpty(fanBoxQt.Text)) ? 0 : Int32.Parse(fanBoxQt.Text);
-            int pcValue = (String.IsNullOrEmpty(fanBoxPc.Text)) ? 0 : Int32.Parse(fanBoxPc.Text);
+            int pcValue = PercentageTextBoxCheck(fanBoxPc);
             if (dropDownListValue != 0 && qtValue != 0 && pcValue != 0)
             {
                 fanBoxPrix.Text = (ActualPrice(fanBoxList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                commissionFanBox = CommissionPrice(fanBoxList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                 if (fanBoxList.Single(u => u.Id == dropDownListValue).Maintenance && Int32.Parse(maintenanceDropDownList.SelectedValue) > 0)
                 {
                     fanBoxMaintenance.Text = (MaintenancePrice(fanBoxList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                    commissionMaintenanceFanBox = CommissionMaintenancePrice(fanBoxList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                 }
-                else fanBoxMaintenance.Text = "0.00";
+                else
+                {
+                    fanBoxMaintenance.Text = "0.00";
+                    commissionMaintenanceFanBox = 0;
+                }
             }
             else
             {
                 fanBoxPrix.Text = "";
+                commissionFanBox = 0;
                 fanBoxMaintenance.Text = "";
+                commissionMaintenanceFanBox = 0;
             }
         }
 
@@ -1105,20 +1055,28 @@ namespace Calculator.DevisGenerator
         {
             int dropDownListValue = Int32.Parse(switchDropDownList.SelectedValue);
             int qtValue = (String.IsNullOrEmpty(switchQt.Text)) ? 0 : Int32.Parse(switchQt.Text);
-            int pcValue = (String.IsNullOrEmpty(switchPc.Text)) ? 0 : Int32.Parse(switchPc.Text);
+            int pcValue = PercentageTextBoxCheck(switchPc);
             if (dropDownListValue != 0 && qtValue != 0 && pcValue != 0)
             {
                 switchPrix.Text = (ActualPrice(switchList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                commissionSwitch = CommissionPrice(switchList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                 if (switchList.Single(u => u.Id == dropDownListValue).Maintenance && Int32.Parse(maintenanceDropDownList.SelectedValue) > 0)
                 {
                     switchMaintenance.Text = (MaintenancePrice(switchList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                    commissionMaitenanceSwitch = CommissionMaintenancePrice(switchList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                 }
-                else switchMaintenance.Text = "0.00";
+                else
+                {
+                    switchMaintenance.Text = "0.00";
+                    commissionMaitenanceSwitch = 0;
+                }
             }
             else
             {
                 switchPrix.Text = "";
+                commissionSwitch = 0;
                 switchMaintenance.Text = "";
+                commissionMaitenanceSwitch = 0;
             }
         }
 
@@ -1126,15 +1084,17 @@ namespace Calculator.DevisGenerator
         {
             int dropDownListValue = Int32.Parse(prestationDropDownList.SelectedValue);
             int qtValue = (String.IsNullOrEmpty(prestationQt.Text)) ? 0 : Int32.Parse(prestationQt.Text);
-            int pcValue = (String.IsNullOrEmpty(prestationPc.Text)) ? 0 : Int32.Parse(prestationPc.Text);
+            int pcValue = PercentageTextBoxCheck(prestationPc);
             if (dropDownListValue != 0 && qtValue != 0 && pcValue != 0)
             {
                 prestationPrix.Text = (ActualPrice(prestationList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                commissionPrestation = CommissionPrice(prestationList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                 prestationMaintenance.Text = "0.00";
             }
             else
             {
                 prestationPrix.Text = "";
+                commissionPrestation = 0;
                 prestationMaintenance.Text = "";
             }
         }
@@ -1143,20 +1103,28 @@ namespace Calculator.DevisGenerator
         {
             int dropDownListValue = Int32.Parse(accessoireDropDownList.SelectedValue);
             int qtValue = (String.IsNullOrEmpty(accessoireQt.Text)) ? 0 : Int32.Parse(accessoireQt.Text);
-            int pcValue = (String.IsNullOrEmpty(accessoirePc.Text)) ? 0 : Int32.Parse(accessoirePc.Text);
+            int pcValue = PercentageTextBoxCheck(accessoirePc);
             if (dropDownListValue != 0 && qtValue != 0 && pcValue != 0)
             {
                 accessoirePrix.Text = (ActualPrice(accessoireList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                commissionAccessoires = CommissionPrice(accessoireList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                 if (accessoireList.Single(u => u.Id == dropDownListValue).Maintenance && Int32.Parse(maintenanceDropDownList.SelectedValue) > 0)
                 {
                     accessoireMaintenance.Text = (MaintenancePrice(accessoireList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                    commissionMaitenanceAccessoires = CommissionMaintenancePrice(accessoireList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                 }
-                else accessoireMaintenance.Text = "0.00";
+                else
+                {
+                    accessoireMaintenance.Text = "0.00";
+                    commissionMaitenanceAccessoires = 0;
+                }
             }
             else
             {
                 accessoirePrix.Text = "";
+                commissionAccessoires = 0;
                 accessoireMaintenance.Text = "";
+                commissionMaitenanceAccessoires = 0;
             }
         }
 
@@ -1166,20 +1134,28 @@ namespace Calculator.DevisGenerator
             {
                 int dropDownListValue = Int32.Parse(antenneDropDownLists[i].SelectedValue);
                 int qtValue = (String.IsNullOrEmpty(antenneQtTextBoxes[i].Text)) ? 0 : Int32.Parse(antenneQtTextBoxes[i].Text);
-                int pcValue = (String.IsNullOrEmpty(antennePcTextBoxes[i].Text)) ? 0 : Int32.Parse(antennePcTextBoxes[i].Text);
+                int pcValue = PercentageTextBoxCheck(antennePcTextBoxes[i]);
                 if (dropDownListValue != 0 && qtValue != 0 && pcValue != 0)
                 {
                     antennePrixLabels[i].Text = (ActualPrice(antenneList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                    commissionAntennes[i] = CommissionPrice(antenneList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                     if (antenneList.Single(u => u.Id == dropDownListValue).Maintenance && Int32.Parse(maintenanceDropDownList.SelectedValue) > 0)
                     {
                         antenneMaintenanceLabels[i].Text = (MaintenancePrice(antenneList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                        commissionMaintenanceAntennes[i] = CommissionMaintenancePrice(antenneList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                     }
-                    else antenneMaintenanceLabels[i].Text = "0.00";
+                    else
+                    {
+                        antenneMaintenanceLabels[i].Text = "0.00";
+                        commissionMaintenanceAntennes[i] = 0;
+                    }
                 }
                 else
                 {
                     antennePrixLabels[i].Text = "";
+                    commissionAntennes[i] = 0;
                     antenneMaintenanceLabels[i].Text = "";
+                    commissionMaintenanceAntennes[i] = 0;
                 }
             }
         }
@@ -1190,23 +1166,58 @@ namespace Calculator.DevisGenerator
             {
                 int dropDownListValue = Int32.Parse(diversDropDownLists[i].SelectedValue);
                 int qtValue = (String.IsNullOrEmpty(diversQtTextBoxes[i].Text)) ? 0 : Int32.Parse(diversQtTextBoxes[i].Text);
-                int pcValue = (String.IsNullOrEmpty(diversPcTextBoxes[i].Text)) ? 0 : Int32.Parse(diversPcTextBoxes[i].Text);
+                int pcValue = PercentageTextBoxCheck(diversPcTextBoxes[i]);
                 if (dropDownListValue != 0 && qtValue != 0 && pcValue != 0)
                 {
                     diversPrixLabels[i].Text = (ActualPrice(diversList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                    commissionDivers[i] = CommissionPrice(diversList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                     if (diversList.Single(u => u.Id == dropDownListValue).Maintenance && Int32.Parse(maintenanceDropDownList.SelectedValue) > 0)
                     {
                         diversMaintenanceLabels[i].Text = (MaintenancePrice(diversList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                        commissionMaintenanceDivers[i] = CommissionMaintenancePrice(diversList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                     }
-                    else diversMaintenanceLabels[i].Text = "0.00";
+                    else
+                    {
+                        diversMaintenanceLabels[i].Text = "0.00";
+                        commissionMaintenanceDivers[i] = 0;
+                    }
                 }
                 else
                 {
                     diversPrixLabels[i].Text = "";
+                    commissionDivers[i] = 0;
                     diversMaintenanceLabels[i].Text = "";
+                    commissionMaintenanceDivers[i] = 0;
+                    }
                 }
             }
-        }
+        
+            /*
+            protected void CablageQtChange(object sender, EventArgs e)
+            {
+                TextBox t = sender as TextBox;
+                int index = (cablageQtTextBoxes.IndexOf(t));
+                if ((cablageList.SingleOrDefault(u => u.Id == Int32.Parse(cablageDropDownLists[index].SelectedValue))) != null &&
+                    ((cablageList.Single(u => u.Id == Int32.Parse(cablageDropDownLists[index].SelectedValue)).Unite).Equals("Forf"))) t.Text = "1";
+            }
+
+            private int PercentageTextBoxCheck(TextBox tBox)
+            {
+                if (String.IsNullOrEmpty(tBox.Text)) return 0;
+                int pcAsInt = Int32.Parse(tBox.Text);
+                if (pcAsInt < 3) pcAsInt = 3;
+                else if (pcAsInt > 50) pcAsInt = 50;
+                tBox.Text = pcAsInt.ToString();
+                return pcAsInt;
+            }
+
+            private int CablageQtTextBoxCheck(TextBox tBox)
+            {
+                int index = (cablageQtTextBoxes.IndexOf(tBox));
+                if ((cablageList.SingleOrDefault(u => u.Id == Int32.Parse(cablageDropDownLists[index].SelectedValue))) != null &&
+                    ((cablageList.Single(u => u.Id == Int32.Parse(cablageDropDownLists[index].SelectedValue)).Unite).Equals("Forf"))) t.Text = "1";
+            }
+            */
 
         private void CalculateCablage()
         {
@@ -1214,31 +1225,78 @@ namespace Calculator.DevisGenerator
             {
                 int dropDownListValue = Int32.Parse(cablageDropDownLists[i].SelectedValue);
                 int qtValue = (String.IsNullOrEmpty(cablageQtTextBoxes[i].Text)) ? 0 : Int32.Parse(cablageQtTextBoxes[i].Text);
-                int pcValue = (String.IsNullOrEmpty(cablagePcTextBoxes[i].Text)) ? 0 : Int32.Parse(cablagePcTextBoxes[i].Text);
+                int pcValue = PercentageTextBoxCheck(cablagePcTextBoxes[i]);
 
                 if (dropDownListValue != 0 && (cablageList.Single(u => u.Id == dropDownListValue).Unite).Equals("Forf"))
                 {
                     cablagePrixLabels[i].Text = "";
+                    if (qtValue != 1)
+                    {
+                        qtValue = 1;
+                        cablageQtTextBoxes[i].Text = "1";
+                    }
+                    commissionCablage[i] = (String.IsNullOrEmpty(cablagePrixForfaitTextBoxes[i].Text)) ? 0 :
+                        CommissionPrice(Decimal.Parse(cablagePrixForfaitTextBoxes[i].Text), qtValue, pcValue);
                     cablageMaintenanceLabels[i].Text = "0.00";
-                    continue;
                 }
                 else if (dropDownListValue != 0 && qtValue != 0 && pcValue != 0)
                 {
                     cablagePrixLabels[i].Text = (ActualPrice(cablageList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue)).ToString();
+                    commissionCablage[i] = CommissionPrice(cablageList.Single(u => u.Id == dropDownListValue).PU, qtValue, pcValue);
                     cablageMaintenanceLabels[i].Text = "0.00";
                 }
                 else
                 {
                     cablagePrixLabels[i].Text = "";
+                    commissionCablage[i] = 0;
                     cablageMaintenanceLabels[i].Text = "";
                 }
             }
+        }
+
+        private void CalculateCommission()
+        {
+            decimal totalCommissionProduits;
+            decimal totalCommissionMaintenance;
+
+            totalCommissionProduits = commissionAudit + commissionFanBox + commissionSwitch + commissionPrestation + commissionAccessoires;
+            totalCommissionMaintenance = commissionMaintenanceFanBox + commissionMaitenanceAccessoires + commissionMaitenanceSwitch;
+
+            for (int i = 0; i < antenneDropDownLists.Count; i++)
+            {
+                totalCommissionProduits += commissionAntennes[i];
+                totalCommissionMaintenance += commissionMaintenanceAntennes[i];
+            }
+            for (int i = 0; i < cablageDropDownLists.Count; i++)
+            {
+                totalCommissionProduits += commissionCablage[i];
+            }
+            for (int i = 0; i < diversDropDownLists.Count; i++)
+            {
+                totalCommissionProduits += commissionDivers[i];
+                totalCommissionMaintenance += commissionMaintenanceDivers[i];
+            }
+
+            if (Int32.Parse(facturationMaintenanceDropDownList.SelectedValue) == 0 && Int32.Parse(maintenanceDropDownList.SelectedValue) != 0)
+                totalCommissionMaintenance /= Int32.Parse(maintenanceDropDownList.SelectedValue);
+
+            commRevendeurOneShotTextBox.Text = Math.Round(totalCommissionProduits, 2).ToString("0.00");
+            commRevendeurMaintenanceTextBox.Text = Math.Round(totalCommissionMaintenance, 2).ToString("0.00");
         }
 
         private void CalculateFullDevis()
         {
             decimal totalPrix = 0;
             decimal totalMaintenance = 0;
+
+            CalculateAudit();
+            CalculateAntennes();
+            CalculateFanBox();
+            CalculateSwitch();
+            CalculatePrestation();
+            CalculateCablage();
+            CalculateAccessoires();
+            CalculateDivers();
 
             if (!String.IsNullOrEmpty(auditPrix.Text)) totalPrix += Decimal.Parse(auditPrix.Text);
 
@@ -1273,6 +1331,9 @@ namespace Calculator.DevisGenerator
 
             totalProduitsHTVATextBox.Text = Math.Round(totalPrix, 2).ToString("0.00");
             totalMaintenanceHTVATextBox.Text = Math.Round(totalMaintenance, 2).ToString("0.00");
+
+
+            CalculateCommission();
         }
     }
 }

@@ -661,6 +661,33 @@ namespace Calculator.DevisGenerator {
         protected global::System.Web.UI.WebControls.TextBox totalMaintenanceHTVATextBox;
         
         /// <summary>
+        /// Contrôle commRevendeurOneShotTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox commRevendeurOneShotTextBox;
+        
+        /// <summary>
+        /// Contrôle commRevendeurMaintenanceLabel.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label commRevendeurMaintenanceLabel;
+        
+        /// <summary>
+        /// Contrôle commRevendeurMaintenanceTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox commRevendeurMaintenanceTextBox;
+        
+        /// <summary>
         /// Contrôle autoliquidationLabel.
         /// </summary>
         /// <remarks>
