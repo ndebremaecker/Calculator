@@ -158,5 +158,10 @@ namespace Calculator.Clients.Controller
         {
             DataProvider.Instance().ExecuteNonQuery("dnn_Calculator_DeleteContact", c.id);
         }
+
+        public void DeleteContact(long id)
+        {
+            DataProvider.Instance().ExecuteNonQuery("dnn_Calculator_DeleteContact", id);
+        }
     }
 }

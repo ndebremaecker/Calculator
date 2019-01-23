@@ -79,6 +79,13 @@
       <DependentUpon>EditClient.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewClient.ascx.cs">
+      <DependentUpon>ViewClient.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewClient.ascx.designer.cs">
+      <DependentUpon>ViewClient.ascx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientList.ascx" />
@@ -86,6 +93,7 @@
     <Content Include="Images\blankuser.png" />
     <Content Include="Module.build" />
     <Content Include="module.css" />
+    <Content Include="ViewClient.ascx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\Calculator.Model.csproj">

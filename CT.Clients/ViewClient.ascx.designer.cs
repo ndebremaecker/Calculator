@@ -10,7 +10,7 @@
 namespace Calculator.Clients {
     
     
-    public partial class EditClient {
+    public partial class ViewClient {
         
         /// <summary>
         /// Contrôle debug.
@@ -22,22 +22,31 @@ namespace Calculator.Clients {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl debug;
         
         /// <summary>
-        /// Contrôle saveButton.
+        /// Contrôle editButton.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton saveButton;
+        protected global::System.Web.UI.WebControls.HyperLink editButton;
         
         /// <summary>
-        /// Contrôle cancelButton.
+        /// Contrôle lbleditButton.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton cancelButton;
+        protected global::System.Web.UI.WebControls.Label lbleditButton;
+        
+        /// <summary>
+        /// Contrôle deleteButton.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton deleteButton;
         
         /// <summary>
         /// Contrôle OwnerLabel.
