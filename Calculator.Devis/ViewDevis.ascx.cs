@@ -197,37 +197,32 @@ namespace Calculator.DevisGenerator
 
         protected void UploadPDF(object sender, EventArgs e)
         {
-            if (FileUploadControl.HasFile)
+            string folderPath = Server.MapPath("~/PDF_Devis/");
+            string filename = folderPath + "Devis " + devisId.ToString() + ".pdf";
+
+            try
             {
-                try
-                {
-                    string folderPath = Server.MapPath("~/PDF_Devis/");
-                    string originalFilename = Path.GetFileName(FileUploadControl.FileName);
-                    string filename = "Devis " + devisId.ToString() + ".pdf";
+                string convertedString = pdfString.Text.Replace('-', '+');
+                convertedString = convertedString.Replace('_', '/');
+                var pdfBytes = Convert.FromBase64String(convertedString);
 
-                    if (FileUploadControl.PostedFile.ContentType == "application/pdf" && Path.GetExtension(originalFilename).ToLower().Equals(".pdf"))
-                    {
-                        if (FileUploadControl.PostedFile.ContentLength < 10240000)
-                        {
-                            if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
-                            FileUploadControl.SaveAs(folderPath + filename);
-                            UploadStatusLabel.Text = "Fichier uploadé avec succès !";
-                            DataProvider.Instance().ExecuteNonQuery("dnn_Calculator_UpdateDevisPDFInfo", devisId, folderPath + filename, DateTime.Now);
-                            PDFExistsLabel.Text = "Un PDF lié à ce devis a été uploadé le " + DateTime.Today.ToString("dd/MM/yyyy");
-                        }
-                        else UploadStatusLabel.Text = "Erreur lors de l'upload: la taille du fichier doit être inférieure à 10 Mb !";
-                    }
-                    else UploadStatusLabel.Text = "Erreur lors de l'upload: seuls les fichiers PDF sont acceptés !";
+                if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
 
-                }
-                catch (Exception ex)
+                using (var fs = new FileStream(filename, FileMode.Create))
+                using (var writer = new BinaryWriter(fs))
                 {
-                    UploadStatusLabel.Text = "Erreur lors de l'upload: " + ex.Message;
+                    writer.Write(pdfBytes, 0, pdfBytes.Length);
+                    writer.Close();
                 }
+
+                UploadStatusLabel.Text = "PDF uploadé avec succès !";
+
+                DataProvider.Instance().ExecuteNonQuery("dnn_Calculator_UpdateDevisPDFInfo", devisId, filename, DateTime.Now);
+                PDFExistsLabel.Text = "Un PDF lié à ce devis a été uploadé le " + DateTime.Today.ToString("dd/MM/yyyy");
             }
-            else
+            catch (Exception ex)
             {
-                UploadStatusLabel.Text = "Vous devez d'abord choisir un fichier";
+                UploadStatusLabel.Text = "Erreur lors de l'upload: " + ex.Message;
             }
         }
     }

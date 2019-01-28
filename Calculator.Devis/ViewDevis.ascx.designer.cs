@@ -292,21 +292,21 @@ namespace Calculator.DevisGenerator {
         protected global::System.Web.UI.WebControls.Label UploadStatusLabel;
         
         /// <summary>
-        /// Contrôle UploadButton.
+        /// Contrôle pdfString.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UploadButton;
+        protected global::System.Web.UI.WebControls.TextBox pdfString;
         
         /// <summary>
-        /// Contrôle FileUploadControl.
+        /// Contrôle uploadPdfFinalButton.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadControl;
+        protected global::System.Web.UI.WebControls.Button uploadPdfFinalButton;
     }
 }

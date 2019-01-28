@@ -171,7 +171,8 @@
     </div>
 
 </div>
-<div>
+
+<div style="display: none;">
     <ul class="dnnActions dnnClear">
         <li>
             <button id="downloadPdfButton" type="button" class="dnnPrimaryAction">Télécharger en PDF</button>
@@ -180,17 +181,20 @@
     </ul>
 </div>
 
-<asp:Label ID="PDFExistsLabel" runat="server" Style="font-weight: 600;"></asp:Label>
-<br />
-<asp:Label ID="UploadStatusLabel" runat="server" Style="font-weight: 600;"></asp:Label>
+<div style="margin-top: 20px;">
+    <asp:Label ID="PDFExistsLabel" runat="server" Style="font-weight: 600;"></asp:Label>
+    <br />
+    <asp:Label ID="UploadStatusLabel" runat="server" Style="font-weight: 600;"></asp:Label>
+</div>
+
+<asp:TextBox ID="pdfString" runat="server" Style="display: none;"></asp:TextBox>
 
 <div>
     <ul class="dnnActions dnnClear">
         <li>
-            <asp:Button runat="server" ID="UploadButton" Text="Uploader PDF" OnClick="UploadPDF" class="dnnPrimaryAction" />
-        </li>
-        <li>
-            <asp:FileUpload ID="FileUploadControl" runat="server" />
+            <button id="uploadPdfButton" type="button" class="dnnPrimaryAction" style="width: 140px;">Uploader PDF</button>
+            <asp:Button ID="uploadPdfFinalButton" runat="server" Text="Envoi" OnClick="UploadPDF" class="dnnPrimaryAction" Style="display: none; width: 140px;" />
+            <span id="tempUploadStatusLabel" style="font-weight: 600;"></span>
         </li>
     </ul>
 </div>
@@ -215,6 +219,30 @@
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, margin, pageWidth, pageHeight, '', 'FAST');
                 $("#downloadStatusLabel").text("");
                 pdf.save(filename);
+            });
+        });
+
+        
+        $("#uploadPdfButton").click(function () {
+            $("#tempUploadStatusLabel").text("Préparation du PDF en cours...");
+            var pageWidth = $('#devisBody').width();
+            var pageHeight = $('#devisBody').height();
+            var margin = 15;
+            var pdfWidth = pageWidth + (margin * 2);
+            var pdfHeight = pageHeight + (margin * 2);
+
+            html2canvas(document.querySelector('#devisBody'),
+                { scale: 3 }
+            ).then(canvas => {
+                var nomSociete = $('#<%=nomSocieteLabel.ClientID%>').text();
+                var filename = ('Devis ' + nomSociete).replace(/[\W_]+/g, ' '); + '.pdf';
+                let pdf = new jsPDF('p', 'pt', [pdfWidth, pdfHeight], true);
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, margin, pageWidth, pageHeight, '', 'FAST');
+                var binary = btoa(pdf.output());
+                $("#<%=pdfString.ClientID%>").val(binary);
+                $("#uploadPdfButton").hide();
+                $("#<%=uploadPdfFinalButton.ClientID%>").show();
+                $("#tempUploadStatusLabel").text("Le PDF est prêt. Appuyez sur Envoi.");
             });
         });
     });
