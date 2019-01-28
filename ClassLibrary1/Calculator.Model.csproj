@@ -57,6 +57,7 @@
     <Compile Include="DevisFanBox.cs" />
     <Compile Include="DevisPrestationDeServiceIT.cs" />
     <Compile Include="DevisSwitch.cs" />
+    <Compile Include="DevisUserPreferences.cs" />
     <Compile Include="Divers.cs" />
     <Compile Include="FanBox.cs" />
     <Compile Include="Lambda.cs" />

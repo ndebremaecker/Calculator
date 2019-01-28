@@ -10,51 +10,42 @@
 namespace Calculator.DevisGenerator {
     
     
-    public partial class DevisList {
+    public partial class DeleteDevis {
         
         /// <summary>
-        /// Contrôle logInPromptLabel.
+        /// Contrôle actionDeniedDiv.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label logInPromptLabel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl actionDeniedDiv;
         
         /// <summary>
-        /// Contrôle allDevisButton.
+        /// Contrôle deleteConfirmationDiv.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton allDevisButton;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl deleteConfirmationDiv;
         
         /// <summary>
-        /// Contrôle userDevisButton.
+        /// Contrôle nomSocieteLabel.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton userDevisButton;
+        protected global::System.Web.UI.WebControls.Label nomSocieteLabel;
         
         /// <summary>
-        /// Contrôle devisDataGrid.
+        /// Contrôle dateCreationLabel.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataGrid devisDataGrid;
-        
-        /// <summary>
-        /// Contrôle addButton.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink addButton;
+        protected global::System.Web.UI.WebControls.Label dateCreationLabel;
     }
 }

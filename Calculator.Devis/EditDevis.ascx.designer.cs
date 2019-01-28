@@ -13,6 +13,15 @@ namespace Calculator.DevisGenerator {
     public partial class EditDevis {
         
         /// <summary>
+        /// Contrôle actionDeniedDiv.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl actionDeniedDiv;
+        
+        /// <summary>
         /// Contrôle debug.
         /// </summary>
         /// <remarks>
@@ -578,60 +587,6 @@ namespace Calculator.DevisGenerator {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table accessoiresTable;
-        
-        /// <summary>
-        /// Contrôle accessoireDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList accessoireDropDownList;
-        
-        /// <summary>
-        /// Contrôle accessoireQt.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox accessoireQt;
-        
-        /// <summary>
-        /// Contrôle accessoireUnit.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label accessoireUnit;
-        
-        /// <summary>
-        /// Contrôle accessoirePc.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox accessoirePc;
-        
-        /// <summary>
-        /// Contrôle accessoirePrix.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label accessoirePrix;
-        
-        /// <summary>
-        /// Contrôle accessoireMaintenance.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label accessoireMaintenance;
         
         /// <summary>
         /// Contrôle diversTable.

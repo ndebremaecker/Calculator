@@ -72,6 +72,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DeleteDevis.ascx" />
     <Content Include="DevisList.ascx" />
     <Content Include="EditDevis.ascx" />
     <Content Include="Images\logo_CT.jpg">
@@ -498,6 +499,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\DevisController.cs" />
+    <Compile Include="DeleteDevis.ascx.cs">
+      <DependentUpon>DeleteDevis.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteDevis.ascx.designer.cs">
+      <DependentUpon>DeleteDevis.ascx</DependentUpon>
+    </Compile>
     <Compile Include="DevisList.ascx.cs">
       <DependentUpon>DevisList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

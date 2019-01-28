@@ -20,12 +20,11 @@ namespace Calculator.DevisGenerator
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            //get the devisid from the querystring
-
 
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
+            Page.MaintainScrollPositionOnPostBack = true;
 
             devisId = Request.QueryString.GetValueOrDefault("Id", -1);
             if (devisId > -1 && !IsPostBack)
@@ -229,7 +228,6 @@ namespace Calculator.DevisGenerator
             else
             {
                 UploadStatusLabel.Text = "Vous devez d'abord choisir un fichier";
-                debug.Text = FileUploadControl.HasFile.ToString();
             }
         }
     }

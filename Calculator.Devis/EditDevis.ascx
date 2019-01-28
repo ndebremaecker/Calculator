@@ -1,5 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditDevis.ascx.cs" Inherits="Calculator.DevisGenerator.EditDevis" %>
 
+<div id="actionDeniedDiv" runat="server" visible="false">
+    <div style="text-align: center; font-size: 1.1em; font-weight: 600; padding: 20px;">
+        Seuls les administrateurs peuvent modifier un devis signé. Les champs ne sont pas éditables.
+    </div>
+</div>
+
 <%-- ReSharper disable UnknownCssClass --%>
 <div id="dnnUsers" class="dnnForm dnnClear">
     <p>* dénote un champ obligatoire</p>
@@ -14,7 +20,7 @@
                 <asp:Label ID="nomSocieteLabel" runat="server" Text="*Nom société:"></asp:Label>
             </div>
             <asp:TextBox ID="nomSocieteTextBox" runat="server" MaxLength="200"></asp:TextBox>
-            <asp:RequiredFieldValidator runat="server" controltovalidate="nomSocieteTextBox" class="errorMessage" errormessage="Champ obligatoire !" />
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="nomSocieteTextBox" class="errorMessage" ErrorMessage="Champ obligatoire !" />
         </div>
         <div class="dnnFormItem">
             <div class="dnnLabel">
@@ -51,14 +57,14 @@
                 <asp:Label ID="nomClientLabel" runat="server" Text="*Nom client:"></asp:Label>
             </div>
             <asp:TextBox ID="nomClientTextBox" runat="server" MaxLength="50"></asp:TextBox>
-            <asp:RequiredFieldValidator runat="server" controltovalidate="nomClientTextBox" class="errorMessage" errormessage="Champ obligatoire !" />
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="nomClientTextBox" class="errorMessage" ErrorMessage="Champ obligatoire !" />
         </div>
         <div class="dnnFormItem">
             <div class="dnnLabel">
                 <asp:Label ID="prenomClientLabel" runat="server" Text="*Prénom client:"></asp:Label>
             </div>
             <asp:TextBox ID="prenomClientTextBox" runat="server" MaxLength="50"></asp:TextBox>
-            <asp:RequiredFieldValidator runat="server" controltovalidate="prenomClientTextBox" class="errorMessage" errormessage="Champ obligatoire !" />
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="prenomClientTextBox" class="errorMessage" ErrorMessage="Champ obligatoire !" />
         </div>
         <div class="dnnFormItem">
             <div class="dnnLabel">
@@ -96,7 +102,6 @@
             </div>
             <asp:TextBox ID="emailITTextBox" runat="server" MaxLength="50"></asp:TextBox>
         </div>
-
 
         <div class="calculatorHeader">
             <span>CALCULATEUR DE DEVIS</span>
@@ -170,77 +175,77 @@
                 </asp:TableHeaderRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Antennes" AutoPostBack="True"
                             OnSelectedIndexChanged="AntenneItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Antennes"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Antennes"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Antennes">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Antennes"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Antennes"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Antennes" AutoPostBack="True"
                             OnSelectedIndexChanged="AntenneItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Antennes"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Antennes"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Antennes">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Antennes"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Antennes"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Antennes" AutoPostBack="True"
                             OnSelectedIndexChanged="AntenneItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Antennes"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Antennes"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Antennes">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Antennes"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Antennes"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
@@ -364,137 +369,137 @@
                 </asp:TableHeaderRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Cablage" AutoPostBack="True"
                             OnSelectedIndexChanged="CablageItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Cablage"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Cablage"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Cablage">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Cablage"></asp:Label>
                         <asp:TextBox runat="server" MaxLength="8" OnKeyPress="return isNumberOrDot(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait" Visible="false"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait _Cablage" Visible="false"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Cablage"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Cablage" AutoPostBack="True"
                             OnSelectedIndexChanged="CablageItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Cablage"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Cablage"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Cablage">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Cablage"></asp:Label>
                         <asp:TextBox runat="server" MaxLength="8" OnKeyPress="return isNumberOrDot(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait" Visible="false"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait _Cablage" Visible="false"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Cablage"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Cablage" AutoPostBack="True"
                             OnSelectedIndexChanged="CablageItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Cablage"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Cablage"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Cablage">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Cablage"></asp:Label>
                         <asp:TextBox runat="server" MaxLength="8" OnKeyPress="return isNumberOrDot(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait" Visible="false"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait _Cablage" Visible="false"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Cablage"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Cablage" AutoPostBack="True"
                             OnSelectedIndexChanged="CablageItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Cablage"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Cablage"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Cablage">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Cablage"></asp:Label>
                         <asp:TextBox runat="server" MaxLength="8" OnKeyPress="return isNumberOrDot(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait" Visible="false"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait _Cablage" Visible="false"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Cablage"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Cablage" AutoPostBack="True"
                             OnSelectedIndexChanged="CablageItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Cablage"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Cablage"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Cablage">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Cablage"></asp:Label>
                         <asp:TextBox runat="server" MaxLength="8" OnKeyPress="return isNumberOrDot(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait" Visible="false"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 46px; font-size: 99%;" CssClass="_PrixForfait _Cablage" Visible="false"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Cablage"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
@@ -510,27 +515,27 @@
                 </asp:TableHeaderRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList ID="accessoireDropDownList" runat="server" CssClass="calculatorList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Accessoires" AutoPostBack="True"
                             OnSelectedIndexChanged="AccessoireItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:TextBox ID="accessoireQt" runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;"></asp:TextBox>
+                        <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Accessoires"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label ID="accessoireUnit" runat="server"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Accessoires"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:TextBox ID="accessoirePc" runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;">
+                        <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Accessoires">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label ID="accessoirePrix" runat="server"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Accessoires"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label ID="accessoireMaintenance" runat="server"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Accessoires"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
@@ -546,52 +551,52 @@
                 </asp:TableHeaderRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Divers" AutoPostBack="True"
                             OnSelectedIndexChanged="DiversItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Divers"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Divers"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Divers">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Divers"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Divers"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList" AutoPostBack="True"
+                        <asp:DropDownList runat="server" CssClass="calculatorList _DDList _Divers" AutoPostBack="True"
                             OnSelectedIndexChanged="DiversItemSelected">
                         </asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt"></asp:TextBox>
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Qt _Divers"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Unit"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Unit _Divers"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox runat="server" MaxLength="2" OnKeyPress="return isNumber(event)" OnTextChanged="Recalculate"
-                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc">
+                            AutoPostBack="True" Style="width: 16px;" CssClass="_Pc _Divers">
                         </asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Prix"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Prix _Divers"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label runat="server" CssClass="_Maintenance"></asp:Label>
+                        <asp:Label runat="server" CssClass="_Maintenance _Divers"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using Calculator.Model;
+using DotNetNuke.Entities.Users;
 
 namespace Calculator.DevisGenerator.Controller
 {
@@ -18,14 +19,25 @@ namespace Calculator.DevisGenerator.Controller
             }
             return devisList;
         }
-
+        
+        public IList<Devis> GetAllDevisFromVendor()
+        {
+            IList<Devis> devisList = CBO.FillCollection<Devis>(DataProvider.Instance().ExecuteReader("dnn_Calculator_GetAllDevisFromVendor", 
+                UserController.Instance.GetCurrentUserInfo().UserID));
+            foreach (var devis in devisList)
+            {
+                FillDevisExtraFields(devis);
+            }
+            return devisList;
+        }        
+        
         public void AddDevis(Devis devis)
         {
             devis.Id = DataProvider.Instance().ExecuteScalar<int>("dnn_Calculator_CreateDevis", devis.NomSociete, devis.AdresseSociete, devis.AdresseFacturation,
                 devis.AdresseInstallation, devis.TelSociete, devis.NumeroEntreprise, devis.NomClient, devis.PrenomClient, devis.TelDirect, devis.Email, devis.NomIT,
                 devis.PrenomIT, devis.TelIT, devis.EmailIT, devis.TotalProduitsHTVA, devis.TotalMaintenanceHTVA,
                 (devis.DateSignature.Year == 1753) ? SqlDateTime.Null : devis.DateSignature, devis.Autoliquidation, devis.DevisSigne, devis.Remarques,
-                DateTime.Today, devis.PeriodiciteMaintenance, devis.PeriodiciteFacturationMaintenance);
+                DateTime.Today, devis.PeriodiciteMaintenance, devis.PeriodiciteFacturationMaintenance, UserController.Instance.GetCurrentUserInfo().UserID);
         }
 
         public void DeleteDevis(Devis devis)
@@ -271,6 +283,23 @@ namespace Calculator.DevisGenerator.Controller
         public void DeleteDevisCablage(int id)
         {
             DataProvider.Instance().ExecuteNonQuery("dnn_Calculator_DeleteDevisCablage", id);
+        }
+        
+        public void AddDevisUserPreferences()
+        {
+            DataProvider.Instance().ExecuteNonQuery("dnn_Calculator_CreateDevisUserPreferences", UserController.Instance.GetCurrentUserInfo().UserID);
+        }
+
+        public DevisUserPreferences GetDevisUserPreferences()
+        {
+            return CBO.FillObject<DevisUserPreferences>(DataProvider.Instance().ExecuteReader("dnn_Calculator_GetDevisUserPreferences", 
+                UserController.Instance.GetCurrentUserInfo().UserID));
+        }
+
+        public void UpdateDevisUserPreferences(int devisTab)
+        {
+            DataProvider.Instance().ExecuteNonQuery("dnn_Calculator_UpdateDevisUserPreferences", UserController.Instance.GetCurrentUserInfo().UserID, 
+                devisTab);
         }
     }
 }

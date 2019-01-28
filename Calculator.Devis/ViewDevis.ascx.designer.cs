@@ -13,15 +13,6 @@ namespace Calculator.DevisGenerator {
     public partial class ViewDevis {
         
         /// <summary>
-        /// Contrôle UploadStatusLabel.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label UploadStatusLabel;
-        
-        /// <summary>
         /// Contrôle debug.
         /// </summary>
         /// <remarks>
@@ -290,6 +281,15 @@ namespace Calculator.DevisGenerator {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label PDFExistsLabel;
+        
+        /// <summary>
+        /// Contrôle UploadStatusLabel.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UploadStatusLabel;
         
         /// <summary>
         /// Contrôle UploadButton.

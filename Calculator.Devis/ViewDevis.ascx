@@ -4,7 +4,6 @@
 <dnn:DnnJsInclude runat="server" FilePath="~/desktopmodules/Calculator/Devis/jsPDF/jsPDF/dist/jspdf.min.js" />
 <dnn:DnnJsInclude runat="server" FilePath="~/desktopmodules/Calculator/Devis/jsPDF/html2canvas.js" />
 
-<asp:Label runat="server" ID="UploadStatusLabel" Text="" Style="font-weight: 600;" />
 <asp:Label runat="server" ID="debug" Text="" Style="font-weight: 600;" />
 
 <div id="devisBody" class="devisBody" style="margin-left: auto; margin-right: auto;">
@@ -172,28 +171,30 @@
     </div>
 
 </div>
-
-<ul class="dnnActions dnnClear">
-    <li>
-        <button id="downloadPdfButton" type="button" class="dnnPrimaryAction">Télécharger en PDF</button>
-        <span id="downloadStatusLabel" style="font-weight: 600;"></span>
-    </li>
-
-</ul>
+<div>
+    <ul class="dnnActions dnnClear">
+        <li>
+            <button id="downloadPdfButton" type="button" class="dnnPrimaryAction">Télécharger en PDF</button>
+            <span id="downloadStatusLabel" style="font-weight: 600;"></span>
+        </li>
+    </ul>
+</div>
 
 <asp:Label ID="PDFExistsLabel" runat="server" Style="font-weight: 600;"></asp:Label>
+<br />
+<asp:Label ID="UploadStatusLabel" runat="server" Style="font-weight: 600;"></asp:Label>
 
+<div>
+    <ul class="dnnActions dnnClear">
+        <li>
+            <asp:Button runat="server" ID="UploadButton" Text="Uploader PDF" OnClick="UploadPDF" class="dnnPrimaryAction" />
+        </li>
+        <li>
+            <asp:FileUpload ID="FileUploadControl" runat="server" />
+        </li>
+    </ul>
+</div>
 
-
-
-        <ul class="dnnActions dnnClear">
-            <li>
-                <asp:Button runat="server" ID="UploadButton" Text="Uploader PDF" OnClick="UploadPDF" class="dnnPrimaryAction" />
-            </li>
-            <li>
-                <asp:FileUpload ID="FileUploadControl" runat="server" />
-            </li>
-        </ul>
 
 <script>
     $(document).ready(function () {

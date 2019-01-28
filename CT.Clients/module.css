@@ -11,7 +11,7 @@
 }
 
 .sticky {
-    position:fixed;
+    position:-webkit-sticky;
 }
 
 .listItem {
