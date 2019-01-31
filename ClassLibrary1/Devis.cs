@@ -29,8 +29,9 @@ namespace Calculator.Model
         public string PathPDF { get; set; }
         public DateTime DateUploadPDF { get; set; }
         public int PeriodiciteMaintenance { get; set; }
-        public int PeriodiciteFacturationMaintenance { get; set; }
-
+        public int PeriodiciteFacturationMaintenance { get; set; }        
+        public int GestionnaireUserId { get; set; }
+        
         public string NomClientComplet { get; set; }
         public string DateSignatureAsString { get; set; }
         public string DevisSigneAsString { get; set; }

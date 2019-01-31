@@ -25,6 +25,7 @@
     <div style="padding: 20px">     
         <asp:DataGrid ID="devisDataGrid" runat="server" AutoGenerateColumns="false" GridLines="None">
             <HeaderStyle CssClass="devisListHeader" />
+            <PagerStyle Mode="NumericPages" Height="40px" HorizontalAlign="Center" VerticalAlign="Bottom"/>
             <ItemStyle CssClass="devisListRow" />
             <Columns>
                 <asp:BoundColumn
@@ -91,8 +92,9 @@
     </div>
 </div>
 
+
 <%-- ReSharper disable UnknownCssClass --%>
-<ul class="dnnActions dnnClear" style="padding-left: 10px;">
+<ul class="dnnActions dnnClear" style="padding-left: 10px; padding-top: 0;">
     <li>
         <asp:HyperLink ID="addButton" runat="server" CssClass="dnnPrimaryAction" Text="Nouveau Devis" Style="font-size: 90%;">
         </asp:HyperLink>

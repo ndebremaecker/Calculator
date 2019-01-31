@@ -21,6 +21,8 @@ namespace Calculator.DevisGenerator
 
             if (!IsPostBack && HttpContext.Current.User.Identity.IsAuthenticated)
             {
+                  devisDataGrid.PagerStyle.Mode = PagerMode.NumericPages;
+
                 DevisUserPreferences prefs = controller.GetDevisUserPreferences();
                 if (prefs == null)
                 {
@@ -48,8 +50,16 @@ namespace Calculator.DevisGenerator
 
         }
 
+        protected void PageChange(object sender, DataGridPageChangedEventArgs e)
+        {
+            devisDataGrid.CurrentPageIndex = e.NewPageIndex;
+            if (userDevisButton.Enabled) ShowAllDevis();
+            else ShowUserDevis();
+        }
+
         protected void ShowAllDevis(object sender, EventArgs e)
         {
+            devisDataGrid.CurrentPageIndex = 0;
             ShowAllDevis();
             controller.UpdateDevisUserPreferences(0);
         }
@@ -64,6 +74,7 @@ namespace Calculator.DevisGenerator
 
         protected void ShowUserDevis(object sender, EventArgs e)
         {
+            devisDataGrid.CurrentPageIndex = 0;
             ShowUserDevis();
             controller.UpdateDevisUserPreferences(1);
         }

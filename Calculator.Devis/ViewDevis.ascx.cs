@@ -9,6 +9,8 @@ using DotNetNuke.Data;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Linq;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Entities.Users;
 
 namespace Calculator.DevisGenerator
 {
@@ -68,6 +70,7 @@ namespace Calculator.DevisGenerator
                     }
                     maintenanceExplanationLabel.Text += " pour un montant HTVA de";
                 }
+                
                 remarquesLabel.Text = devis.Remarques;
 
                 if (devis.DateUploadPDF.Year > 1)
@@ -194,10 +197,9 @@ namespace Calculator.DevisGenerator
             }
         }
 
-
         protected void UploadPDF(object sender, EventArgs e)
         {
-            string folderPath = Server.MapPath("~/PDF_Devis/");
+            string folderPath = Server.MapPath("~/PDF_Devis/") + VendorFolderName() + "/";
             string filename = folderPath + "Devis " + devisId.ToString() + ".pdf";
 
             try
@@ -224,6 +226,13 @@ namespace Calculator.DevisGenerator
             {
                 UploadStatusLabel.Text = "Erreur lors de l'upload: " + ex.Message;
             }
+        }
+                
+        private string VendorFolderName()
+        {
+            var devis = controller.GetDevis(devisId);
+            var vendor = UserController.Instance.GetUserById(PortalController.Instance.GetCurrentPortalSettings().PortalId, devis.GestionnaireUserId);
+            return vendor.UserID.ToString() + " - " + vendor.FirstName + " " + vendor.LastName;
         }
     }
 }
